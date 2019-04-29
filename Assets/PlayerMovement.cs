@@ -7,10 +7,13 @@ public class PlayerMovement : MonoBehaviour
 	public float thrust;
 	private string lastPress;
 	public bool onTerritory = false;
+	private Rigidbody rb;
 
 
 
 	void Start (){
+
+		rb = GetComponent<Rigidbody>();
 
 	}
 	 
@@ -23,6 +26,22 @@ public class PlayerMovement : MonoBehaviour
 			offTerritoryMove();
 	   
  	}
+ 	void OnTriggerEnter(Collider other){
+		if(other.gameObject.CompareTag ("Territory")){
+			onTerritory = true;
+		}
+	}
+
+	void OnTriggerStay(Collider other){
+		if(other.gameObject.CompareTag ("Territory")){
+			onTerritory = true;
+		}
+	}
+
+	void OnTriggerExit(Collider other){
+		onTerritory = false;
+		lastPress = "";
+	}
 
 
  	public void offTerritoryMove(){
