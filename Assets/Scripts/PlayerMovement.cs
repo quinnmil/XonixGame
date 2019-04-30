@@ -11,44 +11,55 @@ public class PlayerMovement : MonoBehaviour
 
 
 
-	void Start (){
+	void Start ()
+    {
 
 		rb = GetComponent<Rigidbody>();
 
 	}
 	 
-	void Update(){
-
-
-		if (onTerritory)
-			onTerritoryMove();
-		else
-			offTerritoryMove();
+	void Update()
+    {
+        if (onTerritory)
+        {
+            onTerritoryMove();
+        }
+        else
+        {
+            offTerritoryMove();
+        }
 	   
  	}
- 	void OnTriggerEnter(Collider other){
-		if(other.gameObject.CompareTag ("Territory")){
+
+ 	void OnTriggerEnter(Collider other)
+    {
+		if(other.gameObject.CompareTag ("Territory"))
+        {
 			onTerritory = true;
 		}
 	}
 
-	void OnTriggerStay(Collider other){
-		if(other.gameObject.CompareTag ("Territory")){
+	void OnTriggerStay(Collider other)
+    {
+		if(other.gameObject.CompareTag ("Territory"))
+        {
 			onTerritory = true;
 		}
 	}
 
-	void OnTriggerExit(Collider other){
+	void OnTriggerExit(Collider other)
+    {
 		onTerritory = false;
 		lastPress = "";
 	}
 
 
- 	public void offTerritoryMove(){
-
+ 	public void offTerritoryMove()
+    {
  		// do not let player go in the opposite direction,
  		// and do not player move in more than one direction at once
- 		if (lastPress != "left"){
+ 		if (lastPress != "left")
+        {
 		    if (Input.GetKey(KeyCode.RightArrow)
 		    	&& !Input.GetKey(KeyCode.UpArrow)  
 		    	&& !Input.GetKey(KeyCode.DownArrow)){
@@ -56,7 +67,9 @@ public class PlayerMovement : MonoBehaviour
 		    	lastPress = "right"; 	
 		    }
 		}
-		if (lastPress != "right"){
+
+		if (lastPress != "right")
+        {
 		    if (Input.GetKey(KeyCode.LeftArrow)
 		    	&& !Input.GetKey(KeyCode.UpArrow)  
 		    	&& !Input.GetKey(KeyCode.DownArrow)){
@@ -65,7 +78,8 @@ public class PlayerMovement : MonoBehaviour
 		    }
 		}
 
-	    if (lastPress != "down"){
+	    if (lastPress != "down")
+        {
 		    if (Input.GetKey(KeyCode.UpArrow)
 		    	&& !Input.GetKey(KeyCode.LeftArrow)  
 		    	&& !Input.GetKey(KeyCode.RightArrow)){
@@ -74,7 +88,8 @@ public class PlayerMovement : MonoBehaviour
 		    }
 		}
 
-		if (lastPress != "up"){
+		if (lastPress != "up")
+        {
 		    if (Input.GetKey(KeyCode.DownArrow)
 		    	&& !Input.GetKey(KeyCode.LeftArrow)  
 		    	&& !Input.GetKey(KeyCode.RightArrow)){
@@ -82,25 +97,31 @@ public class PlayerMovement : MonoBehaviour
 		    	lastPress = "down";
 		    }
 		}
+
 	    //if a key press didn't happen in this frame,
 	    // go the same direction last pressed
-	    if (lastPress == "right"){
+	    if (lastPress == "right")
+        {
 	    	transform.Translate(0,0,thrust*Time.deltaTime);
 	    }
-	    if (lastPress == "left"){
+	    if (lastPress == "left")
+        {
 	    	transform.Translate(0,0,-thrust*Time.deltaTime);
 	    }
-	    if (lastPress == "up"){
+	    if (lastPress == "up")
+        {
 	    	transform.Translate(-thrust*Time.deltaTime,0,0);
 	    }
-	    if (lastPress == "down"){
+	    if (lastPress == "down")
+        {
 	    	transform.Translate(thrust*Time.deltaTime,0,0);
 	    }
 
  	}
 
 
- 	public void onTerritoryMove(){
+ 	public void onTerritoryMove()
+    {
  		
 	    if (Input.GetKey(KeyCode.RightArrow)
 	    	&& !Input.GetKey(KeyCode.UpArrow)  
