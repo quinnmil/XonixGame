@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Territory
+  - Wall
   layers:
   - Default
   - TransparentFX
