@@ -150,12 +150,11 @@ public class PlayerMovement : MonoBehaviour
 
  	public void onTerritoryMove()
     {
-		// if playing is coming back from outer territory
+		// if playing is coming back from non-territory
 		if (path.Count > 0) {
 			fill(path);
-
+			path.Clear();
 		}
-		path.Clear();
  		
 	    if (Input.GetKey(KeyCode.RightArrow)
 	    	&& !Input.GetKey(KeyCode.UpArrow)  
