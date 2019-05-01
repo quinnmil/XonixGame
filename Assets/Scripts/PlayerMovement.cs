@@ -10,6 +10,10 @@ public class PlayerMovement : MonoBehaviour
 	public bool onTerritory = false;
 	private Rigidbody rb;
 	private Vector3 lastPosition;
+    public bool leftWall;
+    public bool rightWall;
+    public bool upWall;
+    public bool downWall;
 
 	// Path will be a list of positions while the 
 	public List<Transform> path; 
@@ -45,7 +49,23 @@ public class PlayerMovement : MonoBehaviour
         {
 			onTerritory = true;
 		}
-	}
+        if (other.gameObject.CompareTag("LeftWall"))
+        {
+            leftWall = true;
+        }
+        if (other.gameObject.CompareTag("RightWall"))
+        {
+            rightWall = true;
+        }
+        if (other.gameObject.CompareTag("UpWall"))
+        {
+            upWall = true;
+        }
+        if (other.gameObject.CompareTag("DownWall"))
+        {
+            downWall = true;
+        }
+    }
 
 	void OnTriggerStay(Collider other)
     {
@@ -53,11 +73,35 @@ public class PlayerMovement : MonoBehaviour
         {
 			onTerritory = true;
 		}
-	}
+        if (other.gameObject.CompareTag("Territory"))
+        {
+            onTerritory = true;
+        }
+        if (other.gameObject.CompareTag("LeftWall"))
+        {
+            leftWall = true;
+        }
+        if (other.gameObject.CompareTag("RightWall"))
+        {
+            rightWall = true;
+        }
+        if (other.gameObject.CompareTag("UpWall"))
+        {
+            upWall = true;
+        }
+        if (other.gameObject.CompareTag("DownWall"))
+        {
+            downWall = true;
+        }
+    }
 
 	void OnTriggerExit(Collider other)
     {
 		onTerritory = false;
+        leftWall = false;
+        downWall = false;
+        upWall = false;
+        rightWall = false;
 
 	}
 
@@ -172,25 +216,38 @@ public class PlayerMovement : MonoBehaviour
 	    if (Input.GetKey(KeyCode.RightArrow)
 	    	&& !Input.GetKey(KeyCode.UpArrow)  
 	    	&& !Input.GetKey(KeyCode.DownArrow)){
-	    	transform.Translate(0,0,thrust * Time.deltaTime);	  	
+            if (!rightWall)
+            {
+                transform.Translate(0, 0, thrust * Time.deltaTime);
+            }
 		}
 	
 	    if (Input.GetKey(KeyCode.LeftArrow)
 	    	&& !Input.GetKey(KeyCode.UpArrow)  
 	    	&& !Input.GetKey(KeyCode.DownArrow)){
-	    	transform.Translate(0,0,-thrust * Time.deltaTime);
+            if (!leftWall)
+            {
+                transform.Translate(0, 0, -thrust * Time.deltaTime);
+            }
 	    }
 
 	    if (Input.GetKey(KeyCode.UpArrow)
 	    	&& !Input.GetKey(KeyCode.LeftArrow)  
 	    	&& !Input.GetKey(KeyCode.RightArrow)){
-	    	transform.Translate(-thrust * Time.deltaTime, 0,0);	    	
+            if (!upWall)
+            {
+                transform.Translate(-thrust * Time.deltaTime, 0, 0);
+            }	    	
 	    }
 
 	    if (Input.GetKey(KeyCode.DownArrow)
 	    	&& !Input.GetKey(KeyCode.LeftArrow)  
 	    	&& !Input.GetKey(KeyCode.RightArrow)){
-	    	transform.Translate(thrust * Time.deltaTime, 0,0);
+            if (!downWall)
+            {
+                transform.Translate(thrust * Time.deltaTime, 0, 0);
+            }
+	    	
 
 	    }
 
