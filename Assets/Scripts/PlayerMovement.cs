@@ -4,10 +4,16 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+	public GameObject trace;
 	public float thrust;
 	private string lastPress;
 	public bool onTerritory = false;
 	private Rigidbody rb;
+	private Vector3 lastPosition;
+
+	// Path will be a list of positions while the 
+	public List<Transform> path; 
+	public GameObject Trail;
 
 
 
@@ -15,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
     {
 
 		rb = GetComponent<Rigidbody>();
+		lastPosition = this.transform.position;
 
 	}
 	 
@@ -117,11 +124,38 @@ public class PlayerMovement : MonoBehaviour
 	    	transform.Translate(thrust*Time.deltaTime,0,0);
 	    }
 
+		// creats objects behind moving player. These objects will have colliders
+		// and be used to register impacts. 
+		float dist = Vector3.Distance(this.transform.position, lastPosition);
+		// as the player moves, add(invisible) game objects along path
+		// and add player coordinates to path. 
+		if (dist > .2){
+			GameObject lineObj = Instantiate(trace, lastPosition, Quaternion.identity);
+			path.Add(this.transform);
+			lastPosition = this.transform.position;
+		}
+
  	}
+
+	public void fill(List<Transform> path){
+		// fills in territory given list of player positions
+		for (int i = 0 ; i< path.Count; i++){
+			// not sure what do to here. need to find which (if any) side of the 
+			// box contains the enemy, and fill in the other section. 
+			float x = path[i].position.x; 
+			float z = path[i].position.z;
+		}
+	}
 
 
  	public void onTerritoryMove()
     {
+		// if playing is coming back from outer territory
+		if (path.Count > 0) {
+			fill(path);
+
+		}
+		path.Clear();
  		
 	    if (Input.GetKey(KeyCode.RightArrow)
 	    	&& !Input.GetKey(KeyCode.UpArrow)  
@@ -149,5 +183,6 @@ public class PlayerMovement : MonoBehaviour
 	    }
 
  	}
+
 
 }
