@@ -13,6 +13,7 @@ TagManager:
   - DownWall
   - Boundary
   - Enemy
+  - Ceiling
   layers:
   - Default
   - TransparentFX
