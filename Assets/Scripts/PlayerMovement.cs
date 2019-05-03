@@ -18,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
 	// Path will be a list of positions while the 
 	public List<Transform> path; 
 	public GameObject Trail;
+    Vector3 originalPos;
 
 
 
@@ -26,8 +27,9 @@ public class PlayerMovement : MonoBehaviour
 
 		rb = GetComponent<Rigidbody>();
 		lastPosition = this.transform.position;
+        originalPos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
 
-	}
+    }
 	 
 
 
