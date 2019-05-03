@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
     public bool rightWall;
     public bool upWall;
     public bool downWall;
+    public bool ceiling;
 
 	// Path will be a list of positions while the 
 	public List<Transform> path; 
@@ -99,6 +100,10 @@ public class PlayerMovement : MonoBehaviour
         {
             downWall = true;
         }
+        if (other.gameObject.CompareTag("Ceiling"))
+        {
+            ceiling = true;
+        }
     }
 
 	void OnTriggerExit(Collider other)
@@ -159,12 +164,24 @@ public class PlayerMovement : MonoBehaviour
             {
                 transform.Translate(thrust * Time.deltaTime, 0, 0);
                 lastPress = "down";
-            }
-            
+            }            
         }
-        //if a key press didn't happen in this frame,
-        // go the same direction last pressed
-        if (lastPress == "right")
+
+        if (!ceiling)
+        {
+            if (Input.GetKey(KeyCode.Space)
+                && !Input.GetKey(KeyCode.LeftArrow)
+                && !Input.GetKey(KeyCode.RightArrow)
+                && !Input.GetKey(KeyCode.UpArrow)
+                && !Input.GetKey(KeyCode.DownArrow))
+            {
+                transform.Translate(0, thrust * Time.deltaTime, 0);
+                lastPress = "vertical";
+            }
+        }
+            //if a key press didn't happen in this frame,
+            // go the same direction last pressed
+            if (lastPress == "right")
         {
             if (!rightWall)
             {
@@ -192,6 +209,14 @@ public class PlayerMovement : MonoBehaviour
                 transform.Translate(thrust * Time.deltaTime, 0, 0);
             }
             
+        }
+        if (lastPress == "vertical")
+        {
+            if (!ceiling)
+            {
+                transform.Translate(0, thrust * Time.deltaTime, 0);
+            }
+
         }
 
 
