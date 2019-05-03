@@ -80,6 +80,7 @@ public class PlayerMovement : MonoBehaviour
             canMove = false;
             loseText.text = "Gameover";
             //add a play again button
+
             //this.transform.position = originalPos;
             //canMove = true;
 
