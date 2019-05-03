@@ -67,6 +67,10 @@ public class PlayerMovement : MonoBehaviour
         {
             downWall = true;
         }
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            transform.position = originalPos;
+        }
     }
 
 	void OnTriggerStay(Collider other)
