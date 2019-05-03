@@ -34,7 +34,7 @@ public class PlayerMovement : MonoBehaviour
 	 
 
 
-    void Update()
+    void FixedUpdate()
     {
         if (onTerritory)
         {
@@ -251,12 +251,6 @@ public class PlayerMovement : MonoBehaviour
             //yield return new WaitForFixedUpdate();
         }
         */
-
-
-
-
-
-
 
     }
 
