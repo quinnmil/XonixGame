@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
     public bool downWall;
 
 	// Path will be a list of positions while the 
-	public List<Transform> path; 
+	public List<GameObject> pathObjects; 
 	public GameObject Trail;
     Vector3 originalPos;
 
@@ -67,6 +67,10 @@ public class PlayerMovement : MonoBehaviour
         {
             downWall = true;
         }
+        if (other.gameObject.CompareTag("Enemy")){
+            this.transform.position = originalPos;
+            clearPath();
+        }
     }
 
 	void OnTriggerStay(Collider other)
@@ -74,6 +78,7 @@ public class PlayerMovement : MonoBehaviour
 		if(other.gameObject.CompareTag ("Territory"))
         {
 			onTerritory = true;
+            clearPath();
 		}
         if (other.gameObject.CompareTag("Territory"))
         {
@@ -209,7 +214,7 @@ public class PlayerMovement : MonoBehaviour
         if (dist > .2)
         {
             GameObject lineObj = Instantiate(trace, lastPosition, Quaternion.identity);
-            path.Add(this.transform);
+            pathObjects.Add(lineObj);
             lastPosition = this.transform.position;
             //yield return new WaitForFixedUpdate();
         }
@@ -222,7 +227,13 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-
+    public void clearPath(){
+        /* removes path from board */
+        // for each object in pathObjects 
+        foreach (var obj in pathObjects){
+            Destroy(obj);
+        }
+    }
 
 
 	public void fill(List<Transform> path){
@@ -238,11 +249,6 @@ public class PlayerMovement : MonoBehaviour
 
     public void onTerritoryMove()
     {     
-		// if playing is coming back from non-territory
-		if (path.Count > 0) {
-			fill(path);
-			path.Clear();
-		}
 
         lastPress = "";
 	    if (Input.GetKey(KeyCode.RightArrow)
