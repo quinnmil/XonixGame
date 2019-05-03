@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
     public bool rightWall;
     public bool upWall;
     public bool downWall;
+    public bool ceiling;
 
 	// Path will be a list of positions while the 
 	public List<GameObject> pathObjects; 
@@ -100,6 +101,10 @@ public class PlayerMovement : MonoBehaviour
         {
             downWall = true;
         }
+        if (other.gameObject.CompareTag("Ceiling"))
+        {
+            ceiling = true;
+        }
     }
 
 	void OnTriggerExit(Collider other)
@@ -118,64 +123,66 @@ public class PlayerMovement : MonoBehaviour
         // do not let player go in the opposite direction,
         // and do not player move in more than one direction at once
         if (!rightWall)
-        {
-            if (lastPress != "left")
+        {  
+            if (Input.GetKey(KeyCode.RightArrow)
+                && !Input.GetKey(KeyCode.UpArrow)
+                && !Input.GetKey(KeyCode.DownArrow))
             {
-                if (Input.GetKey(KeyCode.RightArrow)
-                    && !Input.GetKey(KeyCode.UpArrow)
-                    && !Input.GetKey(KeyCode.DownArrow))
-                {
-                    transform.Translate(0, 0, thrust * Time.deltaTime);
-                    lastPress = "right";
-                }
-            }
+                transform.Translate(0, 0, thrust * Time.deltaTime);
+                lastPress = "right";
+            }    
         }
 
         if (!leftWall)
         {
-            if (lastPress != "right")
+
+            if (Input.GetKey(KeyCode.LeftArrow)
+                && !Input.GetKey(KeyCode.UpArrow)
+                && !Input.GetKey(KeyCode.DownArrow))
             {
-                if (Input.GetKey(KeyCode.LeftArrow)
-                    && !Input.GetKey(KeyCode.UpArrow)
-                    && !Input.GetKey(KeyCode.DownArrow))
-                {
-                    transform.Translate(0, 0, -thrust * Time.deltaTime);
-                    lastPress = "left";
-                }
+                transform.Translate(0, 0, -thrust * Time.deltaTime);
+                lastPress = "left";
             }
         }
 
 
         if (!upWall)
         {
-            if (lastPress != "down")
+            if (Input.GetKey(KeyCode.UpArrow)
+                && !Input.GetKey(KeyCode.LeftArrow)
+                && !Input.GetKey(KeyCode.RightArrow))
             {
-                if (Input.GetKey(KeyCode.UpArrow)
-                    && !Input.GetKey(KeyCode.LeftArrow)
-                    && !Input.GetKey(KeyCode.RightArrow))
-                {
-                    transform.Translate(-thrust * Time.deltaTime, 0, 0);
-                    lastPress = "up";
-                }
+                transform.Translate(-thrust * Time.deltaTime, 0, 0);
+                lastPress = "up";
             }
         }
 
         if (!downWall)
         {
-            if (lastPress != "up")
+            if (Input.GetKey(KeyCode.DownArrow)
+                && !Input.GetKey(KeyCode.LeftArrow)
+                && !Input.GetKey(KeyCode.RightArrow))
             {
-                if (Input.GetKey(KeyCode.DownArrow)
-                    && !Input.GetKey(KeyCode.LeftArrow)
-                    && !Input.GetKey(KeyCode.RightArrow))
-                {
-                    transform.Translate(thrust * Time.deltaTime, 0, 0);
-                    lastPress = "down";
-                }
+                transform.Translate(thrust * Time.deltaTime, 0, 0);
+                lastPress = "down";
+            }            
+        }
+
+        if (!ceiling)
+        {
+            if (Input.GetKey(KeyCode.Space)
+                && !Input.GetKey(KeyCode.LeftArrow)
+                && !Input.GetKey(KeyCode.RightArrow)
+                && !Input.GetKey(KeyCode.UpArrow)
+                && !Input.GetKey(KeyCode.DownArrow))
+            {
+                transform.Translate(0, thrust * Time.deltaTime, 0);
+                lastPress = "vertical";
             }
         }
-        //if a key press didn't happen in this frame,
-        // go the same direction last pressed
-        if (lastPress == "right")
+            //if a key press didn't happen in this frame,
+            // go the same direction last pressed
+            if (lastPress == "right")
         {
             if (!rightWall)
             {
@@ -203,6 +210,14 @@ public class PlayerMovement : MonoBehaviour
                 transform.Translate(thrust * Time.deltaTime, 0, 0);
             }
             
+        }
+        if (lastPress == "vertical")
+        {
+            if (!ceiling)
+            {
+                transform.Translate(0, thrust * Time.deltaTime, 0);
+            }
+
         }
 
 
