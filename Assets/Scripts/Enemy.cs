@@ -32,13 +32,15 @@ public class Enemy : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        //rb.velocity = RandomVector(0f, 5f);
-        if (other.tag == "Territory" || other.tag == "LeftWall" 
-            || other.tag == "RightWall" || other.tag == "UpWall" || other.tag == "DownWall")
+            //rb.velocity = RandomVector(0f, 5f);
+            if (other.tag == "Territory" || other.tag == "LeftWall" 
+                || other.tag == "RightWall" || other.tag == "UpWall" || other.tag == "DownWall")
+            {
+                moveLeft = !moveLeft;
+            }
+
+        if (other.tag == "Player")
         {
-            moveLeft = !moveLeft;
-        }
-        if (other.tag == "Player"){
             // lose a life, reset player position. 
             // moved this logic to playerMovement.cs
             

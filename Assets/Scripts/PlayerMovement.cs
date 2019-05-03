@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
 	public string lastPress;
 	public bool onTerritory = false;
 	private Rigidbody rb;
+    public bool canMove;
 	private Vector3 lastPosition;
     public bool leftWall;
     public bool rightWall;
@@ -16,8 +18,11 @@ public class PlayerMovement : MonoBehaviour
     public bool downWall;
     public bool ceiling;
 
-	// Path will be a list of positions while the 
-	public List<GameObject> pathObjects; 
+    public Text winText;
+    public Text loseText;
+
+    // Path will be a list of positions while the 
+    public List<GameObject> pathObjects; 
 	public GameObject Trail;
     Vector3 originalPos;
 
@@ -27,12 +32,14 @@ public class PlayerMovement : MonoBehaviour
     {
 
 		rb = GetComponent<Rigidbody>();
-		lastPosition = this.transform.position;
+        canMove = true;
+        winText.text = "";
+        loseText.text = "";
+        lastPosition = this.transform.position;
         originalPos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
 
     }
 	 
-
 
     void FixedUpdate()
     {
@@ -69,12 +76,24 @@ public class PlayerMovement : MonoBehaviour
             downWall = true;
         }
         if (other.gameObject.CompareTag("Enemy")){
-            this.transform.position = originalPos;
+
+            canMove = false;
+            loseText.text = "Gameover";
+            //add a play again button
+            //this.transform.position = originalPos;
+            //canMove = true;
+
             clearPath();
         }
         if (other.gameObject.CompareTag("Finish Zone"))
         {
-            this.transform.position = originalPos;
+            //Freezes the player
+            canMove = false;
+            winText.text = "Level Completed";
+
+            //Add a play again button
+
+            //this.transform.position = originalPos;
             //rb.useGravity = true;
             //StartCoroutine("Reset");
 
@@ -135,77 +154,83 @@ public class PlayerMovement : MonoBehaviour
 	}
 
 
- 	public void offTerritoryMove()
+    public void offTerritoryMove()
     {
         // do not let player go in the opposite direction,
         // and do not player move in more than one direction at once
-        if (!rightWall)
-        {  
-            if (Input.GetKey(KeyCode.RightArrow)
-                && !Input.GetKey(KeyCode.UpArrow)
-                && !Input.GetKey(KeyCode.DownArrow))
-            {
-                transform.Translate(0, 0, thrust * Time.deltaTime);
-                lastPress = "right";
-            }    
-        }
 
-        if (!leftWall)
-        {
-
-            if (Input.GetKey(KeyCode.LeftArrow)
-                && !Input.GetKey(KeyCode.UpArrow)
-                && !Input.GetKey(KeyCode.DownArrow))
+        if (canMove) //if the player is allowed to move
+        { 
+            if (!rightWall)
             {
-                transform.Translate(0, 0, -thrust * Time.deltaTime);
-                lastPress = "left";
+                if (Input.GetKey(KeyCode.RightArrow)
+                    && !Input.GetKey(KeyCode.UpArrow)
+                    && !Input.GetKey(KeyCode.DownArrow))
+                {
+                    transform.Translate(0, 0, thrust * Time.deltaTime);
+                    lastPress = "right";
+                }
+            }
+
+            if (!leftWall)
+            {
+
+                if (Input.GetKey(KeyCode.LeftArrow)
+                    && !Input.GetKey(KeyCode.UpArrow)
+                    && !Input.GetKey(KeyCode.DownArrow))
+                {
+                    transform.Translate(0, 0, -thrust * Time.deltaTime);
+                    lastPress = "left";
+                }
+            }
+
+            if (!upWall)
+            {
+                if (Input.GetKey(KeyCode.UpArrow)
+                    && !Input.GetKey(KeyCode.LeftArrow)
+                    && !Input.GetKey(KeyCode.RightArrow))
+                {
+                    transform.Translate(-thrust * Time.deltaTime, 0, 0);
+                    lastPress = "up";
+                }
+            }
+
+            if (!downWall)
+            {
+                if (Input.GetKey(KeyCode.DownArrow)
+                    && !Input.GetKey(KeyCode.LeftArrow)
+                    && !Input.GetKey(KeyCode.RightArrow))
+                {
+                    transform.Translate(thrust * Time.deltaTime, 0, 0);
+                    lastPress = "down";
+                }
+            }
+
+            if (!ceiling)
+            {
+                if (Input.GetKey(KeyCode.Space)
+                    && !Input.GetKey(KeyCode.LeftArrow)
+                    && !Input.GetKey(KeyCode.RightArrow)
+                    && !Input.GetKey(KeyCode.UpArrow)
+                    && !Input.GetKey(KeyCode.DownArrow))
+                {
+                    transform.Translate(0, thrust * Time.deltaTime, 0);
+                    lastPress = "vertical";
+                }
             }
         }
 
 
-        if (!upWall)
-        {
-            if (Input.GetKey(KeyCode.UpArrow)
-                && !Input.GetKey(KeyCode.LeftArrow)
-                && !Input.GetKey(KeyCode.RightArrow))
-            {
-                transform.Translate(-thrust * Time.deltaTime, 0, 0);
-                lastPress = "up";
-            }
-        }
-
-        if (!downWall)
-        {
-            if (Input.GetKey(KeyCode.DownArrow)
-                && !Input.GetKey(KeyCode.LeftArrow)
-                && !Input.GetKey(KeyCode.RightArrow))
-            {
-                transform.Translate(thrust * Time.deltaTime, 0, 0);
-                lastPress = "down";
-            }            
-        }
-
-        if (!ceiling)
-        {
-            if (Input.GetKey(KeyCode.Space)
-                && !Input.GetKey(KeyCode.LeftArrow)
-                && !Input.GetKey(KeyCode.RightArrow)
-                && !Input.GetKey(KeyCode.UpArrow)
-                && !Input.GetKey(KeyCode.DownArrow))
-            {
-                transform.Translate(0, thrust * Time.deltaTime, 0);
-                lastPress = "vertical";
-            }
-        }
-            //if a key press didn't happen in this frame,
-            // go the same direction last pressed
-            if (lastPress == "right")
+        //if a key press didn't happen in this frame,
+        // go the same direction last pressed
+        if (lastPress == "right")
         {
             if (!rightWall)
             {
                 transform.Translate(0, 0, thrust * Time.deltaTime);
             }
         }
+
         if (lastPress == "left")
         {
             if (!leftWall)
@@ -213,6 +238,7 @@ public class PlayerMovement : MonoBehaviour
                 transform.Translate(0, 0, -thrust * Time.deltaTime);
             }
         }
+
         if (lastPress == "up")
         {
             if (!upWall)
@@ -220,6 +246,7 @@ public class PlayerMovement : MonoBehaviour
                 transform.Translate(-thrust * Time.deltaTime, 0, 0);
             }
         }
+
         if (lastPress == "down")
         {
             if (!downWall)
@@ -228,6 +255,7 @@ public class PlayerMovement : MonoBehaviour
             }
             
         }
+
         if (lastPress == "vertical")
         {
             if (!ceiling)
