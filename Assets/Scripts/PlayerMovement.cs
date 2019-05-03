@@ -72,6 +72,13 @@ public class PlayerMovement : MonoBehaviour
             this.transform.position = originalPos;
             clearPath();
         }
+        if (other.gameObject.CompareTag("Finish Zone"))
+        {
+            this.transform.position = originalPos;
+            //rb.useGravity = true;
+            //StartCoroutine("Reset");
+
+        }
     }
 
 	void OnTriggerStay(Collider other)
@@ -106,14 +113,24 @@ public class PlayerMovement : MonoBehaviour
             ceiling = true;
         }
     }
+    /*
+    IEnumerator Reset()
+    {
+        yield return new WaitForSeconds(3);     //Count is the amount of time in seconds that you want to wait.
+        this.transform.position = originalPos;
+        rb.useGravity = false;
+        yield return null;
+    }
+    */
 
-	void OnTriggerExit(Collider other)
+    void OnTriggerExit(Collider other)
     {
 		onTerritory = false;
         leftWall = false;
         downWall = false;
         upWall = false;
         rightWall = false;
+        ceiling = false;
 
 	}
 
@@ -220,7 +237,7 @@ public class PlayerMovement : MonoBehaviour
 
         }
 
-
+        /*
         // creats objects behind moving player. These objects will have colliders
         // and be used to register impacts. 
         float dist = Vector3.Distance(this.transform.position, lastPosition);
@@ -233,6 +250,7 @@ public class PlayerMovement : MonoBehaviour
             lastPosition = this.transform.position;
             //yield return new WaitForFixedUpdate();
         }
+        */
 
 
 
