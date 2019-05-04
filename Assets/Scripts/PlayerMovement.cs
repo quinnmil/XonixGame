@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
     public bool upWall;
     public bool downWall;
     public bool ceiling;
+    public bool floor;
 
     public Text winText;
     public Text loseText;
@@ -132,6 +133,11 @@ public class PlayerMovement : MonoBehaviour
         {
             ceiling = true;
         }
+        /*
+        if (other.gameObject.CompareTag("Floor"))
+        {
+            floor = true;
+        }*/
     }
     /*
     IEnumerator Reset()
@@ -219,6 +225,20 @@ public class PlayerMovement : MonoBehaviour
                     lastPress = "vertical";
                 }
             }
+            /*
+            if (!floor)
+            {
+                if (Input.GetKey(KeyCode.Fire3)
+                    && !Input.GetKey(KeyCode.LeftArrow)
+                    && !Input.GetKey(KeyCode.RightArrow)
+                    && !Input.GetKey(KeyCode.UpArrow)
+                    && !Input.GetKey(KeyCode.DownArrow))
+                {
+                    transform.Translate(0, thrust * Time.deltaTime, 0);
+                    lastPress = "vertical";
+                }
+            }
+            */
         }
 
 
