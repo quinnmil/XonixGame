@@ -1,2 +1,3 @@
-# XonixGame
-CIS 410 Group Project
+# Unnamed Difficult Game
+
+CIS410 Group Project
