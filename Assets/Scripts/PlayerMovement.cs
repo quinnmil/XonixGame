@@ -18,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
     public bool downWall;
     public bool ceiling;
     public bool floor;
+    public bool enemy;
     public bool verticalPlane;
 
     public Text winText;
@@ -74,8 +75,9 @@ public class PlayerMovement : MonoBehaviour
 
         if (other.gameObject.CompareTag("Enemy")) {
 
-            loseText.text = "Gameover";
+            //loseText.text = "Gameover";
             //add a play again button
+            enemy = true;
             this.transform.position = originalPos;
 
             clearPath();
@@ -83,7 +85,7 @@ public class PlayerMovement : MonoBehaviour
         if (other.gameObject.CompareTag("Finish Zone"))
         {
 
-            winText.text = "Level Completed";
+            //winText.text = "Level Completed";
             
             //Add a play again button
 
@@ -122,6 +124,16 @@ public class PlayerMovement : MonoBehaviour
      
         if (other.gameObject.CompareTag("floor"))
             floor = true;
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+
+            //loseText.text = "Gameover";
+            //add a play again button
+            enemy = true;
+            this.transform.position = originalPos;
+
+            clearPath();
+        }
 
     }
 
