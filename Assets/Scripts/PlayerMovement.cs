@@ -69,6 +69,8 @@ public class PlayerMovement : MonoBehaviour
 
         if (other.gameObject.CompareTag("Vertical Plane"))
             verticalPlane = true;
+        if (other.gameObject.CompareTag("floor"))
+            floor = true;
 
         if (other.gameObject.CompareTag("Enemy")) {
 
@@ -118,7 +120,7 @@ public class PlayerMovement : MonoBehaviour
         if (other.gameObject.CompareTag("Vertical Plane"))
             verticalPlane = true;
      
-        if (other.gameObject.CompareTag("Floor"))
+        if (other.gameObject.CompareTag("floor"))
             floor = true;
 
     }
@@ -132,6 +134,7 @@ public class PlayerMovement : MonoBehaviour
         upWall = false;
         rightWall = false;
         ceiling = false;
+        floor = false;
         verticalPlane = false;
 
     }
@@ -157,7 +160,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if (right && !up && !down)
             {
-                transform.Translate(0, 0, thrust * Time.deltaTime);
+                transform.Translate(thrust * Time.deltaTime, 0, 0);
                 lastPress = "right";
             }
         }
@@ -167,7 +170,7 @@ public class PlayerMovement : MonoBehaviour
 
             if (left && !up && !down)
             {
-                transform.Translate(0, 0, -thrust * Time.deltaTime);
+                transform.Translate(-thrust * Time.deltaTime, 0, 0);
                 lastPress = "left";
             }
         }
@@ -176,7 +179,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if (up && !left && !right)
             {
-                transform.Translate(-thrust * Time.deltaTime, 0, 0);
+                transform.Translate(0, 0, thrust * Time.deltaTime);
                 lastPress = "up";
             }
         }
@@ -185,14 +188,14 @@ public class PlayerMovement : MonoBehaviour
         {
             if (down && !left && !right)
             {
-                transform.Translate(thrust * Time.deltaTime, 0, 0);
+                transform.Translate(0, 0, -thrust * Time.deltaTime);
                 lastPress = "down";
             }
         }
 
         if (!ceiling)
         {
-            if (verticalPlane && !left && !right)
+            if (verticalPlane && up && !left && !right)
             {
                 transform.Translate(0, thrust * Time.deltaTime, 0);
                 lastPress = "up_vertical";
@@ -201,7 +204,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (!floor)
         {
-            if (verticalPlane && !left && !right)
+            if (verticalPlane && down && !left && !right)
             {
                 transform.Translate(0, -thrust * Time.deltaTime, 0);
                 lastPress = "down_vertical";
@@ -222,7 +225,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if (!rightWall)
             {
-                transform.Translate(0, 0, thrust * Time.deltaTime);
+                transform.Translate(thrust * Time.deltaTime, 0, 0);
             }
         }
 
@@ -230,15 +233,15 @@ public class PlayerMovement : MonoBehaviour
         {
             if (!leftWall)
             {
-                transform.Translate(0, 0, -thrust * Time.deltaTime);
+                transform.Translate(-thrust * Time.deltaTime, 0, 0);
             }
         }
 
         if (lastPress == "up")
         {
-            if (!upWall)
+            if (!upWall && !verticalPlane)
             {
-                transform.Translate(-thrust * Time.deltaTime, 0, 0);
+                transform.Translate(0, 0, thrust * Time.deltaTime); ;
             }
         }
 
@@ -246,7 +249,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if (!downWall)
             {
-                transform.Translate(thrust * Time.deltaTime, 0, 0);
+                transform.Translate(0, 0, -thrust * Time.deltaTime);
             }
 
         }
@@ -255,7 +258,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if (!ceiling)
             {
-                transform.Translate(0, thrust * Time.deltaTime, 0);
+                transform.Translate(0,thrust * Time.deltaTime,0);
             }
 
         }
@@ -264,7 +267,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if (!floor)
             {
-                transform.Translate(0, -thrust * Time.deltaTime, 0);
+                transform.Translate(0,-thrust * Time.deltaTime,0);
             }
 
         }
