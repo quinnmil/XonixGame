@@ -5,34 +5,35 @@ using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
-	public GameObject trace;
-	public float thrust;
-	public string lastPress;
-	public bool onTerritory = false;
-	private Rigidbody rb;
+    public GameObject trace;
+    public float thrust;
+    public string lastPress;
+    public bool onTerritory = false;
+    private Rigidbody rb;
     public bool canMove;
-	private Vector3 lastPosition;
+    private Vector3 lastPosition;
     public bool leftWall;
     public bool rightWall;
     public bool upWall;
     public bool downWall;
     public bool ceiling;
     public bool floor;
+    public bool verticalPlane;
 
     public Text winText;
     public Text loseText;
 
     // Path will be a list of positions while the 
-    public List<GameObject> pathObjects; 
-	public GameObject Trail;
+    public List<GameObject> pathObjects;
+    public GameObject Trail;
     Vector3 originalPos;
 
 
 
-	void Start ()
+    void Start()
     {
 
-		rb = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
         canMove = true;
         winText.text = "";
         loseText.text = "";
@@ -40,207 +41,180 @@ public class PlayerMovement : MonoBehaviour
         originalPos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
 
     }
-	 
+
 
     void FixedUpdate()
     {
         if (onTerritory)
-        {
-            onTerritoryMove();
-        }
-        else
-        {
-            offTerritoryMove();
-        }
+            Move();
+        else offTerritoryMove();
     }
 
     void OnTriggerEnter(Collider other)
     {
-		if(other.gameObject.CompareTag ("Territory"))
-        {
-			onTerritory = true;
-		}
-        if (other.gameObject.CompareTag("LeftWall"))
-        {
-            leftWall = true;
-        }
-        if (other.gameObject.CompareTag("RightWall"))
-        {
-            rightWall = true;
-        }
-        if (other.gameObject.CompareTag("UpWall"))
-        {
-            upWall = true;
-        }
-        if (other.gameObject.CompareTag("DownWall"))
-        {
-            downWall = true;
-        }
-        if (other.gameObject.CompareTag("Enemy")){
+        if (other.gameObject.CompareTag("Territory"))
+            onTerritory = true;
 
-            canMove = false;
+        if (other.gameObject.CompareTag("LeftWall"))
+            leftWall = true;
+
+        if (other.gameObject.CompareTag("RightWall"))
+            rightWall = true;
+
+        if (other.gameObject.CompareTag("UpWall"))
+            upWall = true;
+
+        if (other.gameObject.CompareTag("DownWall"))
+            downWall = true;
+
+        if (other.gameObject.CompareTag("Vertical Plane"))
+            verticalPlane = true;
+
+        if (other.gameObject.CompareTag("Enemy")) {
+
             loseText.text = "Gameover";
             //add a play again button
-
             this.transform.position = originalPos;
-            //canMove = true;
 
             clearPath();
         }
         if (other.gameObject.CompareTag("Finish Zone"))
         {
-            //Freezes the player
-            canMove = false;
+
             winText.text = "Level Completed";
 
             //Add a play again button
 
             //this.transform.position = originalPos;
-            //rb.useGravity = true;
-            //StartCoroutine("Reset");
+
 
         }
     }
 
-	void OnTriggerStay(Collider other)
+    void OnTriggerStay(Collider other)
     {
-		if(other.gameObject.CompareTag ("Territory"))
-        {
-			onTerritory = true;
-            clearPath();
-		}
         if (other.gameObject.CompareTag("Territory"))
-        {
             onTerritory = true;
-        }
+ 
+      
+        if (other.gameObject.CompareTag("Territory"))
+            onTerritory = true;
+
         if (other.gameObject.CompareTag("LeftWall"))
-        {
             leftWall = true;
-        }
-        if (other.gameObject.CompareTag("RightWall"))
-        {
+        
+        if (other.gameObject.CompareTag("RightWall"))  
             rightWall = true;
-        }
+     
         if (other.gameObject.CompareTag("UpWall"))
-        {
             upWall = true;
-        }
+
         if (other.gameObject.CompareTag("DownWall"))
-        {
             downWall = true;
-        }
+ 
         if (other.gameObject.CompareTag("Ceiling"))
-        {
             ceiling = true;
-        }
-        /*
+       
+        if (other.gameObject.CompareTag("Vertical Plane"))
+            verticalPlane = true;
+     
         if (other.gameObject.CompareTag("Floor"))
-        {
             floor = true;
-        }*/
+
     }
-    /*
-    IEnumerator Reset()
-    {
-        yield return new WaitForSeconds(3);     //Count is the amount of time in seconds that you want to wait.
-        this.transform.position = originalPos;
-        rb.useGravity = false;
-        yield return null;
-    }
-    */
+
 
     void OnTriggerExit(Collider other)
     {
-		onTerritory = false;
+        onTerritory = false;
         leftWall = false;
         downWall = false;
         upWall = false;
         rightWall = false;
         ceiling = false;
+        verticalPlane = false;
 
-	}
+    }
+
+    public void Move()
+    {
+        // do not let player go in the opposite direction,
+        // and do not player move in more than one direction at once
+        bool left = false;
+        bool right = false;
+        bool up = false;
+        bool down = false;
+
+        if (Input.GetKey(KeyCode.LeftArrow))
+            left = true;
+        if (Input.GetKey(KeyCode.RightArrow))
+            right = true;
+        if (Input.GetKey(KeyCode.UpArrow))
+            up = true;
+        if (Input.GetKey(KeyCode.DownArrow))
+            down = true;
+        if (!rightWall)
+        {
+            if (right && !up && !down)
+            {
+                transform.Translate(0, 0, thrust * Time.deltaTime);
+                lastPress = "right";
+            }
+        }
+
+        if (!leftWall)
+        {
+
+            if (left && !up && !down)
+            {
+                transform.Translate(0, 0, -thrust * Time.deltaTime);
+                lastPress = "left";
+            }
+        }
+
+        if (!upWall && !verticalPlane)
+        {
+            if (up && !left && !right)
+            {
+                transform.Translate(-thrust * Time.deltaTime, 0, 0);
+                lastPress = "up";
+            }
+        }
+
+        if (!downWall &&!verticalPlane)
+        {
+            if (down && !left && !right)
+            {
+                transform.Translate(thrust * Time.deltaTime, 0, 0);
+                lastPress = "down";
+            }
+        }
+
+        if (!ceiling)
+        {
+            if (verticalPlane && !left && !right)
+            {
+                transform.Translate(0, thrust * Time.deltaTime, 0);
+                lastPress = "up_vertical";
+            }
+        }
+
+        if (!floor)
+        {
+            if (verticalPlane && !left && !right)
+            {
+                transform.Translate(0, -thrust * Time.deltaTime, 0);
+                lastPress = "down_vertical";
+            }
+        }
+
+
+    }
 
 
     public void offTerritoryMove()
     {
-        // do not let player go in the opposite direction,
-        // and do not player move in more than one direction at once
-
-        if (canMove) //if the player is allowed to move
-        { 
-            if (!rightWall)
-            {
-                if (Input.GetKey(KeyCode.RightArrow)
-                    && !Input.GetKey(KeyCode.UpArrow)
-                    && !Input.GetKey(KeyCode.DownArrow))
-                {
-                    transform.Translate(0, 0, thrust * Time.deltaTime);
-                    lastPress = "right";
-                }
-            }
-
-            if (!leftWall)
-            {
-
-                if (Input.GetKey(KeyCode.LeftArrow)
-                    && !Input.GetKey(KeyCode.UpArrow)
-                    && !Input.GetKey(KeyCode.DownArrow))
-                {
-                    transform.Translate(0, 0, -thrust * Time.deltaTime);
-                    lastPress = "left";
-                }
-            }
-
-            if (!upWall)
-            {
-                if (Input.GetKey(KeyCode.UpArrow)
-                    && !Input.GetKey(KeyCode.LeftArrow)
-                    && !Input.GetKey(KeyCode.RightArrow))
-                {
-                    transform.Translate(-thrust * Time.deltaTime, 0, 0);
-                    lastPress = "up";
-                }
-            }
-
-            if (!downWall)
-            {
-                if (Input.GetKey(KeyCode.DownArrow)
-                    && !Input.GetKey(KeyCode.LeftArrow)
-                    && !Input.GetKey(KeyCode.RightArrow))
-                {
-                    transform.Translate(thrust * Time.deltaTime, 0, 0);
-                    lastPress = "down";
-                }
-            }
-
-            if (!ceiling)
-            {
-                if (Input.GetKey(KeyCode.Space)
-                    && !Input.GetKey(KeyCode.LeftArrow)
-                    && !Input.GetKey(KeyCode.RightArrow)
-                    && !Input.GetKey(KeyCode.UpArrow)
-                    && !Input.GetKey(KeyCode.DownArrow))
-                {
-                    transform.Translate(0, thrust * Time.deltaTime, 0);
-                    lastPress = "vertical";
-                }
-            }
-            /*
-            if (!floor)
-            {
-                if (Input.GetKey(KeyCode.Fire3)
-                    && !Input.GetKey(KeyCode.LeftArrow)
-                    && !Input.GetKey(KeyCode.RightArrow)
-                    && !Input.GetKey(KeyCode.UpArrow)
-                    && !Input.GetKey(KeyCode.DownArrow))
-                {
-                    transform.Translate(0, thrust * Time.deltaTime, 0);
-                    lastPress = "vertical";
-                }
-            }
-            */
-        }
-
+        Move();
 
         //if a key press didn't happen in this frame,
         // go the same direction last pressed
@@ -274,14 +248,23 @@ public class PlayerMovement : MonoBehaviour
             {
                 transform.Translate(thrust * Time.deltaTime, 0, 0);
             }
-            
+
         }
 
-        if (lastPress == "vertical")
+        if (lastPress == "up_vertical")
         {
             if (!ceiling)
             {
                 transform.Translate(0, thrust * Time.deltaTime, 0);
+            }
+
+        }
+
+        if (lastPress == "down_vertical")
+        {
+            if (!floor)
+            {
+                transform.Translate(0, -thrust * Time.deltaTime, 0);
             }
 
         }
@@ -303,69 +286,22 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    public void clearPath(){
+    public void clearPath() {
         /* removes path from board */
         // for each object in pathObjects 
-        foreach (var obj in pathObjects){
+        foreach (var obj in pathObjects) {
             Destroy(obj);
         }
     }
 
 
-	public void fill(List<Transform> path){
-		// fills in territory given list of player positions
-		for (int i = 0 ; i< path.Count; i++){
-			// not sure what do to here. need to find which (if any) side of the 
-			// box contains the enemy, and fill in the other section. 
-			float x = path[i].position.x; 
-			float z = path[i].position.z;
-		}
+    public void fill(List<Transform> path) {
+        // fills in territory given list of player positions
+        for (int i = 0; i < path.Count; i++) {
+            // not sure what do to here. need to find which (if any) side of the 
+            // box contains the enemy, and fill in the other section. 
+            float x = path[i].position.x;
+            float z = path[i].position.z;
+        }
     }
-
-
-    public void onTerritoryMove()
-    {     
-
-        lastPress = "";
-	    if (Input.GetKey(KeyCode.RightArrow)
-	    	&& !Input.GetKey(KeyCode.UpArrow)  
-	    	&& !Input.GetKey(KeyCode.DownArrow)){
-            if (!rightWall)
-            {
-                transform.Translate(0, 0, thrust * Time.deltaTime);
-            }
-		}
-	
-	    if (Input.GetKey(KeyCode.LeftArrow)
-	    	&& !Input.GetKey(KeyCode.UpArrow)  
-	    	&& !Input.GetKey(KeyCode.DownArrow)){
-            if (!leftWall)
-            {
-                transform.Translate(0, 0, -thrust * Time.deltaTime);
-            }
-	    }
-
-	    if (Input.GetKey(KeyCode.UpArrow)
-	    	&& !Input.GetKey(KeyCode.LeftArrow)  
-	    	&& !Input.GetKey(KeyCode.RightArrow)){
-            if (!upWall)
-            {
-                transform.Translate(-thrust * Time.deltaTime, 0, 0);
-            }	    	
-	    }
-
-	    if (Input.GetKey(KeyCode.DownArrow)
-	    	&& !Input.GetKey(KeyCode.LeftArrow)  
-	    	&& !Input.GetKey(KeyCode.RightArrow)){
-            if (!downWall)
-            {
-                transform.Translate(thrust * Time.deltaTime, 0, 0);
-            }
-	    	
-
-	    }
-
- 	}
-
-
 }
