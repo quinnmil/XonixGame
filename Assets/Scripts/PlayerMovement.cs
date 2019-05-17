@@ -24,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
     public float orig_y = 0;
     public float orig_z = -26;
     private int deaths = 0;
+    public bool win = false;
 
     public string winText;
     public string loseText;
@@ -33,6 +34,7 @@ public class PlayerMovement : MonoBehaviour
     public GameObject Trail;
     Vector3 originalPos;
     public GUISkin deathCounter;
+    public GUISkin winAlert;
 
 
 
@@ -61,6 +63,11 @@ public class PlayerMovement : MonoBehaviour
     {
         GUI.skin = deathCounter;
         GUI.Label(new Rect(0, 10, 300, 100), "Deaths: " + deaths);
+        if (win){
+            var centeredStyle = GUI.skin.GetStyle("Label");
+            centeredStyle.alignment = TextAnchor.UpperCenter;
+            GUI.Label(new Rect(Screen.width / 2 - 50, Screen.height / 2 - 25, 100, 50), "Level Complete", centeredStyle);
+        }
     }
 
     void OnTriggerEnter(Collider other)
@@ -96,6 +103,7 @@ public class PlayerMovement : MonoBehaviour
         }
         if (other.gameObject.CompareTag("Finish Zone"))
         {
+            win = true;
             onTerritory = true;
             Debug.Log("on territory enter");
             //winText.text = "Level Completed";
