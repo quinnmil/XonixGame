@@ -142,6 +142,7 @@ public class PlayerMovement : MonoBehaviour
             //loseText.text = "Gameover";
             //add a play again button
             enemy = true;
+            lastPress = "";
             deaths += 1;
             this.transform.position = originalPos;
 
