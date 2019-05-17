@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -105,6 +107,7 @@ public class PlayerMovement : MonoBehaviour
         {
             win = true;
             onTerritory = true;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
             Debug.Log("on territory enter");
             //winText.text = "Level Completed";
             
@@ -117,11 +120,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void OnTriggerStay(Collider other)
-    {
-        if (other.gameObject.CompareTag("Territory"))
-            onTerritory = true;
- 
-      
+    { 
         if (other.gameObject.CompareTag("Territory"))
             onTerritory = true;
 
