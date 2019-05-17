@@ -20,6 +20,9 @@ public class PlayerMovement : MonoBehaviour
     public bool floor;
     public bool enemy;
     public bool verticalPlane;
+    public float orig_x = -20;
+    public float orig_y = 0;
+    public float orig_z = -26;
 
     public Text winText;
     public Text loseText;
@@ -40,6 +43,7 @@ public class PlayerMovement : MonoBehaviour
         loseText.text = "";
         lastPosition = this.transform.position;
         originalPos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+        print(originalPos);
 
     }
 
@@ -78,7 +82,7 @@ public class PlayerMovement : MonoBehaviour
             //loseText.text = "Gameover";
             //add a play again button
             enemy = true;
-            this.transform.position = originalPos;
+            //this.transform.position = new Vector3(-20,0,-26);
 
             clearPath();
         }
@@ -130,7 +134,7 @@ public class PlayerMovement : MonoBehaviour
             //loseText.text = "Gameover";
             //add a play again button
             enemy = true;
-            this.transform.position = originalPos;
+            this.transform.position = new Vector3(orig_x, orig_y, orig_z);
 
             clearPath();
         }
