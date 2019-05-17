@@ -39,12 +39,5 @@ public class Enemy : MonoBehaviour
                 moveLeft = !moveLeft;
             }
 
-        if (other.tag == "Player")
-        {
-            // lose a life, reset player position. 
-            // moved this logic to playerMovement.cs
-            
-        }
-
     }
 }
