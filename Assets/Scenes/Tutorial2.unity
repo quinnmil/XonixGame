@@ -482,6 +482,7 @@ MonoBehaviour:
   loseText: 
   pathObjects: []
   Trail: {fileID: 0}
+  deathCounter: {fileID: 0}
 --- !u!54 &500370241
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1967,7 +1968,7 @@ PrefabInstance:
     - target: {fileID: 9142708951745431542, guid: 9b362fe08171c8346a6299b9ac1d56ac,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 26.8
+      value: 27.3
       objectReference: {fileID: 0}
     - target: {fileID: 9142708951745431542, guid: 9b362fe08171c8346a6299b9ac1d56ac,
         type: 3}
@@ -2023,6 +2024,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Size.y
       value: 21.51
+      objectReference: {fileID: 0}
+    - target: {fileID: 9142708951745431541, guid: 9b362fe08171c8346a6299b9ac1d56ac,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 0.78
+      objectReference: {fileID: 0}
+    - target: {fileID: 9142708951745431541, guid: 9b362fe08171c8346a6299b9ac1d56ac,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.94
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9b362fe08171c8346a6299b9ac1d56ac, type: 3}
