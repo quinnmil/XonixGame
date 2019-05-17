@@ -375,6 +375,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: wall_1 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4456126625242490218, guid: 2a3d0559cd30543369a1270369782809,
+        type: 3}
+      propertyPath: m_TagString
+      value: LeftWall
+      objectReference: {fileID: 0}
     - target: {fileID: 4456126625242490229, guid: 2a3d0559cd30543369a1270369782809,
         type: 3}
       propertyPath: m_LocalPosition.x
