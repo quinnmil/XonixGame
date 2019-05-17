@@ -23,6 +23,7 @@ public class PlayerMovement : MonoBehaviour
     public float orig_x = -20;
     public float orig_y = 0;
     public float orig_z = -26;
+    private int deaths = 0;
 
     public string winText;
     public string loseText;
@@ -31,6 +32,7 @@ public class PlayerMovement : MonoBehaviour
     public List<GameObject> pathObjects;
     public GameObject Trail;
     Vector3 originalPos;
+    public GUISkin deathCounter;
 
 
 
@@ -53,6 +55,12 @@ public class PlayerMovement : MonoBehaviour
         if (onTerritory)
             Move();
         else offTerritoryMove();
+    }
+
+    private void OnGUI()
+    {
+        GUI.skin = deathCounter;
+        GUI.Label(new Rect(0, 10, 300, 100), "Deaths: " + deaths);
     }
 
     void OnTriggerEnter(Collider other)
@@ -134,6 +142,7 @@ public class PlayerMovement : MonoBehaviour
             //loseText.text = "Gameover";
             //add a play again button
             enemy = true;
+            deaths += 1;
             this.transform.position = originalPos;
 
             clearPath();
