@@ -8,9 +8,9 @@ public class newLevel : MonoBehaviour
 {
     public string nextLevel;
 
-    void onTriggerEnter(Collider other){
+    void onTriggerStay(Collider other){
         print("collision detected");
-        if (other.CompareTag("Player")){
+        if (other.gameObject.tag == "Player"){
             print("next level");
             SceneManager.LoadScene(nextLevel);
         }

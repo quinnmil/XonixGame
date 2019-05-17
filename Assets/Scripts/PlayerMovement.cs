@@ -96,7 +96,8 @@ public class PlayerMovement : MonoBehaviour
         }
         if (other.gameObject.CompareTag("Finish Zone"))
         {
-
+            onTerritory = true;
+            Debug.Log("on territory enter");
             //winText.text = "Level Completed";
             
             //Add a play again button
