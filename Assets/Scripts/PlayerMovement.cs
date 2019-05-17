@@ -25,7 +25,7 @@ public class PlayerMovement : MonoBehaviour
     public float orig_x = -20;
     public float orig_y = 0;
     public float orig_z = -26;
-    private int deaths = 0;
+    private static int deaths = 0;
     public bool win = false;
 
     public string winText;
@@ -52,7 +52,6 @@ public class PlayerMovement : MonoBehaviour
         print(originalPos);
 
     }
-
 
     void FixedUpdate()
     {
