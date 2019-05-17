@@ -24,8 +24,8 @@ public class PlayerMovement : MonoBehaviour
     public float orig_y = 0;
     public float orig_z = -26;
 
-    public Text winText;
-    public Text loseText;
+    public string winText;
+    public string loseText;
 
     // Path will be a list of positions while the 
     public List<GameObject> pathObjects;
@@ -39,10 +39,10 @@ public class PlayerMovement : MonoBehaviour
 
         rb = GetComponent<Rigidbody>();
         canMove = true;
-        winText.text = "";
-        loseText.text = "";
+        winText = "";
+        loseText = "";
         lastPosition = this.transform.position;
-        originalPos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+        originalPos = this.transform.position;
         print(originalPos);
 
     }
@@ -134,7 +134,7 @@ public class PlayerMovement : MonoBehaviour
             //loseText.text = "Gameover";
             //add a play again button
             enemy = true;
-            this.transform.position = new Vector3(orig_x, orig_y, orig_z);
+            this.transform.position = originalPos;
 
             clearPath();
         }
