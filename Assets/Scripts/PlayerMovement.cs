@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
+
 
 
 public class PlayerMovement : MonoBehaviour
@@ -28,15 +30,11 @@ public class PlayerMovement : MonoBehaviour
     private static int deaths = 0;
     public bool win = false;
 
-    public string winText;
-    public string loseText;
 
-    // Path will be a list of positions while the 
-    public List<GameObject> pathObjects;
-    public GameObject Trail;
     Vector3 originalPos;
-    public GUISkin deathCounter;
-    public GUISkin winAlert;
+    public TextMeshProUGUI deathCounter;
+    public TextMeshProUGUI winAlert;
+
 
 
 
@@ -45,12 +43,16 @@ public class PlayerMovement : MonoBehaviour
 
         rb = GetComponent<Rigidbody>();
         canMove = true;
-        winText = "";
-        loseText = "";
         lastPosition = this.transform.position;
         originalPos = this.transform.position;
         print(originalPos);
 
+    }
+
+    private void Update()
+    {
+        deathCounter.text = "Deaths:" + deaths.ToString();
+        if (win) { winAlert.text = "Level Complete"; }
     }
 
     void FixedUpdate()
@@ -60,16 +62,6 @@ public class PlayerMovement : MonoBehaviour
         else offTerritoryMove();
     }
 
-    private void OnGUI()
-    {
-        GUI.skin = deathCounter;
-        GUI.Label(new Rect(0, 10, 300, 100), "Deaths: " + deaths);
-        if (win){
-            var centeredStyle = GUI.skin.GetStyle("Label");
-            centeredStyle.alignment = TextAnchor.UpperCenter;
-            GUI.Label(new Rect(Screen.width / 2 - 50, Screen.height / 2 - 25, 100, 50), "Level Complete", centeredStyle);
-        }
-    }
 
     void OnTriggerEnter(Collider other)
     {
@@ -93,14 +85,12 @@ public class PlayerMovement : MonoBehaviour
         if (other.gameObject.CompareTag("floor"))
             floor = true;
 
-        if (other.gameObject.CompareTag("Enemy")) {
+        if (other.gameObject.CompareTag("Enemy"))
+        {
 
-            //loseText.text = "Gameover";
-            //add a play again button
+
             enemy = true;
-            //this.transform.position = new Vector3(-20,0,-26);
 
-            clearPath();
         }
         if (other.gameObject.CompareTag("Finish Zone"))
         {
@@ -108,52 +98,44 @@ public class PlayerMovement : MonoBehaviour
             onTerritory = true;
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
             Debug.Log("on territory enter");
-            //winText.text = "Level Completed";
-            
-            //Add a play again button
 
-            //this.transform.position = originalPos;
 
 
         }
     }
 
     void OnTriggerStay(Collider other)
-    { 
+    {
         if (other.gameObject.CompareTag("Territory"))
             onTerritory = true;
 
         if (other.gameObject.CompareTag("LeftWall"))
             leftWall = true;
-        
-        if (other.gameObject.CompareTag("RightWall"))  
+
+        if (other.gameObject.CompareTag("RightWall"))
             rightWall = true;
-     
+
         if (other.gameObject.CompareTag("UpWall"))
             upWall = true;
 
         if (other.gameObject.CompareTag("DownWall"))
             downWall = true;
- 
+
         if (other.gameObject.CompareTag("Ceiling"))
             ceiling = true;
-       
+
         if (other.gameObject.CompareTag("Vertical Plane"))
             verticalPlane = true;
-     
+
         if (other.gameObject.CompareTag("floor"))
             floor = true;
         if (other.gameObject.CompareTag("Enemy"))
         {
 
-            //loseText.text = "Gameover";
-            //add a play again button
             enemy = true;
             lastPress = "";
             deaths += 1;
             this.transform.position = originalPos;
-
-            clearPath();
         }
 
     }
@@ -217,7 +199,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        if (!downWall &&!verticalPlane)
+        if (!downWall && !verticalPlane)
         {
             if (down && !left && !right)
             {
@@ -291,7 +273,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if (!ceiling)
             {
-                transform.Translate(0,thrust * Time.deltaTime,0);
+                transform.Translate(0, thrust * Time.deltaTime, 0);
             }
 
         }
@@ -300,44 +282,12 @@ public class PlayerMovement : MonoBehaviour
         {
             if (!floor)
             {
-                transform.Translate(0,-thrust * Time.deltaTime,0);
+                transform.Translate(0, -thrust * Time.deltaTime, 0);
             }
 
         }
 
-        /*
-        // creats objects behind moving player. These objects will have colliders
-        // and be used to register impacts. 
-        float dist = Vector3.Distance(this.transform.position, lastPosition);
-        // as the player moves, add(invisible) game objects along path
-        // and add player coordinates to path. 
-        if (dist > .2)
-        {
-            GameObject lineObj = Instantiate(trace, lastPosition, Quaternion.identity);
-            pathObjects.Add(lineObj);
-            lastPosition = this.transform.position;
-            //yield return new WaitForFixedUpdate();
-        }
-        */
 
     }
 
-    public void clearPath() {
-        /* removes path from board */
-        // for each object in pathObjects 
-        foreach (var obj in pathObjects) {
-            Destroy(obj);
-        }
-    }
-
-
-    public void fill(List<Transform> path) {
-        // fills in territory given list of player positions
-        for (int i = 0; i < path.Count; i++) {
-            // not sure what do to here. need to find which (if any) side of the 
-            // box contains the enemy, and fill in the other section. 
-            float x = path[i].position.x;
-            float z = path[i].position.z;
-        }
-    }
 }
