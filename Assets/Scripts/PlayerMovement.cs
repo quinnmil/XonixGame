@@ -104,7 +104,7 @@ public class PlayerMovement : MonoBehaviour
         if (other.gameObject.CompareTag("Crate"))
         {
             Destroy(crate_clone);
-            numCrates += 1;
+            numCrates = 1;
             
 
         }
