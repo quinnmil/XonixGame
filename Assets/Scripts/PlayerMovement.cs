@@ -52,7 +52,6 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         deathCounter.text = "Deaths:" + deaths.ToString();
-        if (win) { winAlert.text = "Level Complete"; }
     }
 
     void FixedUpdate()
@@ -96,12 +95,19 @@ public class PlayerMovement : MonoBehaviour
         {
             win = true;
             onTerritory = true;
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            winAlert.text = "Level Complete";
+            StartCoroutine("nextLevel");
             Debug.Log("on territory enter");
 
 
 
         }
+    }
+    IEnumerator nextLevel()
+    {
+        yield return new WaitForSeconds(1);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+
     }
 
     void OnTriggerStay(Collider other)

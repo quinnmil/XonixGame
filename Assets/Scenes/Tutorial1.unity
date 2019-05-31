@@ -435,6 +435,11 @@ PrefabInstance:
       propertyPath: deathCounter
       value: 
       objectReference: {fileID: 1707260596}
+    - target: {fileID: 6671390376265945213, guid: d78b15f2ad0314e2292ae4772deed1c8,
+        type: 3}
+      propertyPath: winAlert
+      value: 
+      objectReference: {fileID: 1545098049}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d78b15f2ad0314e2292ae4772deed1c8, type: 3}
 --- !u!1 &465529001 stripped
@@ -1155,6 +1160,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8a352dc26c3804673bd639c84576923c, type: 3}
+--- !u!114 &1545098049 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4508541356896560038, guid: 82ecb6d83be0f5a4f92243e88c44ceaf,
+    type: 3}
+  m_PrefabInstance: {fileID: 289210406702761701}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1707260596 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 289210407176895569, guid: 82ecb6d83be0f5a4f92243e88c44ceaf,
