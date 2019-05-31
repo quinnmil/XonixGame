@@ -17,6 +17,7 @@ TagManager:
   - Finish Zone
   - Vertical Plane
   - floor
+  - Crate
   layers:
   - Default
   - TransparentFX

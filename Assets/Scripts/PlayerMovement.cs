@@ -29,11 +29,18 @@ public class PlayerMovement : MonoBehaviour
     public float orig_z = -26;
     private static int deaths = 0;
     public bool win = false;
+    public int crate_num;
+    public int numCrates = 0;
+    public bool crates = false;
+    public GameObject crate;
+    private GameObject crate_clone;
+    public Vector3 crate_pos;
 
 
     Vector3 originalPos;
     public TextMeshProUGUI deathCounter;
     public TextMeshProUGUI winAlert;
+    public TextMeshProUGUI crateCounter;
 
 
 
@@ -46,11 +53,14 @@ public class PlayerMovement : MonoBehaviour
         lastPosition = this.transform.position;
         originalPos = this.transform.position;
         print(originalPos);
+        crate_clone = Instantiate(crate,crate_pos,Quaternion.identity);
 
-    }
+}
 
     private void Update()
     {
+        if (crates)
+            crateCounter.text = "Crates:" + numCrates.ToString()+"/"+crate_num.ToString();
         deathCounter.text = "Deaths:" + deaths.ToString();
     }
 
@@ -86,18 +96,38 @@ public class PlayerMovement : MonoBehaviour
 
         if (other.gameObject.CompareTag("Enemy"))
         {
-
-
+            numCrates = 0;
             enemy = true;
+            crate_clone = Instantiate(crate,crate_pos, Quaternion.identity);
+
+        }
+        if (other.gameObject.CompareTag("Crate"))
+        {
+            Destroy(crate_clone);
+            numCrates += 1;
+            
 
         }
         if (other.gameObject.CompareTag("Finish Zone"))
         {
-            win = true;
             onTerritory = true;
-            winAlert.text = "Level Complete";
-            StartCoroutine("nextLevel");
-            Debug.Log("on territory enter");
+            if (crates)
+            {
+                if (numCrates == crate_num)
+                    win = true;
+                    winAlert.text = "Level Complete";
+                    StartCoroutine("nextLevel");
+                    Debug.Log("on territory enter");
+            }
+            else
+            {
+                win = true;
+                winAlert.text = "Level Complete";
+                StartCoroutine("nextLevel");
+                Debug.Log("on territory enter");
+            }
+        
+            
 
 
 
