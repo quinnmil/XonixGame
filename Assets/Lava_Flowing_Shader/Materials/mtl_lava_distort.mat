@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: mtl_lava_distort
-  m_Shader: {fileID: 4800000, guid: 6a151f652f5ba03458e9a7cd03ae88e8, type: 3}
+  m_Shader: {fileID: 200, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
   m_EnableInstancingVariants: 0
@@ -26,9 +26,9 @@ Material:
     - _LavaTex:
         m_Texture: {fileID: 2800000, guid: 93a726948508cc14eab67fb1abe2daa8, type: 3}
         m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0.47828633, y: 0}
+        m_Offset: {x: 1.0917269, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 348fa4d278c53ad4dacd07df1e63a248, type: 3}
+        m_Texture: {fileID: 2800000, guid: 564a53723d00e9848bcc7fac3aa06445, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 17.023058, y: 0}
     - _MainTex2:
@@ -43,8 +43,10 @@ Material:
     - _Displacement: 0.0375
     - _DistortX: 1.03
     - _DistortY: 0.38
+    - _InvFade: 1
     - _RefractTexTiling: 1
     m_Colors:
     - _ChannelFactor: {r: -0.3281326, g: 0.5920941, b: 0.7360384, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 0.07058824}
     - _SpeedStrength: {r: 1, g: 1, b: 1, a: 1}
+    - _TintColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
