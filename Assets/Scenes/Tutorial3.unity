@@ -2043,7 +2043,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 5ec2f61a6f89b469bb41436539f927d3, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.7
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -4833,6 +4833,10 @@ PrefabInstance:
       propertyPath: playerExplosion
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 500370240, guid: d0e2b6bf944e12c439220558bf7de75a, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 64717633637501740, guid: d0e2b6bf944e12c439220558bf7de75a,
         type: 3}
       propertyPath: m_Convex
@@ -4843,7 +4847,8 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 500370240, guid: d0e2b6bf944e12c439220558bf7de75a, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: d0e2b6bf944e12c439220558bf7de75a, type: 3}
 --- !u!1001 &1388329981
 PrefabInstance:
@@ -6263,7 +6268,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!82 &2146424813
 AudioSource:
   m_ObjectHideFlags: 0
