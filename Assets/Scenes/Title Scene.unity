@@ -662,26 +662,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
-    - target: {fileID: 289210407176895569, guid: 82ecb6d83be0f5a4f92243e88c44ceaf,
-        type: 3}
-      propertyPath: m_textInfo.characterCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 289210407176895569, guid: 82ecb6d83be0f5a4f92243e88c44ceaf,
-        type: 3}
-      propertyPath: m_textInfo.wordCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 289210407176895569, guid: 82ecb6d83be0f5a4f92243e88c44ceaf,
-        type: 3}
-      propertyPath: m_textInfo.lineCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 289210407176895569, guid: 82ecb6d83be0f5a4f92243e88c44ceaf,
-        type: 3}
-      propertyPath: m_textInfo.pageCount
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4508541356896560038, guid: 82ecb6d83be0f5a4f92243e88c44ceaf,
         type: 3}
       propertyPath: m_text
@@ -753,6 +733,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_fontSizeBase
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 289210407176895569, guid: 82ecb6d83be0f5a4f92243e88c44ceaf,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 289210407176895569, guid: 82ecb6d83be0f5a4f92243e88c44ceaf,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 289210407176895569, guid: 82ecb6d83be0f5a4f92243e88c44ceaf,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 289210407176895569, guid: 82ecb6d83be0f5a4f92243e88c44ceaf,
+        type: 3}
+      propertyPath: m_textInfo.pageCount
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 289210406196245066, guid: 82ecb6d83be0f5a4f92243e88c44ceaf,
         type: 3}
@@ -922,7 +922,7 @@ MonoBehaviour:
 
     Created By
 
-    Zac Sims, Quinn Milionis, and Rafael Yehuda'
+    Zac Sims, Quinn Milionis, and Refael Yehuda'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8a89fa14b10d46a99122fd4f73fca9a2, type: 2}
   m_sharedMaterial: {fileID: 2140474, guid: 8a89fa14b10d46a99122fd4f73fca9a2, type: 2}
