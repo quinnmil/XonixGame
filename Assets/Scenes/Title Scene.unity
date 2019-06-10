@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.5748171, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -662,97 +662,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
-    - target: {fileID: 4508541356896560038, guid: 82ecb6d83be0f5a4f92243e88c44ceaf,
+    - target: {fileID: 289210407176895569, guid: 82ecb6d83be0f5a4f92243e88c44ceaf,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 289210407176895569, guid: 82ecb6d83be0f5a4f92243e88c44ceaf,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 289210407176895569, guid: 82ecb6d83be0f5a4f92243e88c44ceaf,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 289210407176895569, guid: 82ecb6d83be0f5a4f92243e88c44ceaf,
+        type: 3}
+      propertyPath: m_textInfo.pageCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 289210407176895569, guid: 82ecb6d83be0f5a4f92243e88c44ceaf,
         type: 3}
       propertyPath: m_text
-      value: 'Mercury
-
-'
-      objectReference: {fileID: 0}
-    - target: {fileID: 4508541356896560038, guid: 82ecb6d83be0f5a4f92243e88c44ceaf,
-        type: 3}
-      propertyPath: m_textInfo.characterCount
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 4508541356896560038, guid: 82ecb6d83be0f5a4f92243e88c44ceaf,
-        type: 3}
-      propertyPath: m_textInfo.wordCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4508541356896560038, guid: 82ecb6d83be0f5a4f92243e88c44ceaf,
-        type: 3}
-      propertyPath: m_textInfo.lineCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4508541356896560038, guid: 82ecb6d83be0f5a4f92243e88c44ceaf,
-        type: 3}
-      propertyPath: m_textInfo.pageCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4508541356896560038, guid: 82ecb6d83be0f5a4f92243e88c44ceaf,
-        type: 3}
-      propertyPath: m_textInfo.spaceCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4508541356896560038, guid: 82ecb6d83be0f5a4f92243e88c44ceaf,
-        type: 3}
-      propertyPath: m_margin.w
-      value: -80.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4508541356896560038, guid: 82ecb6d83be0f5a4f92243e88c44ceaf,
-        type: 3}
-      propertyPath: m_firstOverflowCharacterIndex
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4508541356896560038, guid: 82ecb6d83be0f5a4f92243e88c44ceaf,
-        type: 3}
-      propertyPath: m_margin.x
-      value: -840.4297
-      objectReference: {fileID: 0}
-    - target: {fileID: 4508541356896560038, guid: 82ecb6d83be0f5a4f92243e88c44ceaf,
-        type: 3}
-      propertyPath: m_margin.z
-      value: -514.1797
-      objectReference: {fileID: 0}
-    - target: {fileID: 4508541356896560038, guid: 82ecb6d83be0f5a4f92243e88c44ceaf,
-        type: 3}
-      propertyPath: m_margin.y
-      value: -121.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 4508541356896560038, guid: 82ecb6d83be0f5a4f92243e88c44ceaf,
-        type: 3}
-      propertyPath: m_textAlignment
-      value: 258
-      objectReference: {fileID: 0}
-    - target: {fileID: 4508541356896560038, guid: 82ecb6d83be0f5a4f92243e88c44ceaf,
-        type: 3}
-      propertyPath: m_fontSize
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 4508541356896560038, guid: 82ecb6d83be0f5a4f92243e88c44ceaf,
-        type: 3}
-      propertyPath: m_fontSizeBase
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 289210407176895569, guid: 82ecb6d83be0f5a4f92243e88c44ceaf,
-        type: 3}
-      propertyPath: m_textInfo.characterCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 289210407176895569, guid: 82ecb6d83be0f5a4f92243e88c44ceaf,
-        type: 3}
-      propertyPath: m_textInfo.wordCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 289210407176895569, guid: 82ecb6d83be0f5a4f92243e88c44ceaf,
-        type: 3}
-      propertyPath: m_textInfo.lineCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 289210407176895569, guid: 82ecb6d83be0f5a4f92243e88c44ceaf,
-        type: 3}
-      propertyPath: m_textInfo.pageCount
-      value: 0
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 289210406196245066, guid: 82ecb6d83be0f5a4f92243e88c44ceaf,
         type: 3}
@@ -858,6 +791,78 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4508541356896560038, guid: 82ecb6d83be0f5a4f92243e88c44ceaf,
+        type: 3}
+      propertyPath: m_text
+      value: 'Mercury
+
+'
+      objectReference: {fileID: 0}
+    - target: {fileID: 4508541356896560038, guid: 82ecb6d83be0f5a4f92243e88c44ceaf,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4508541356896560038, guid: 82ecb6d83be0f5a4f92243e88c44ceaf,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4508541356896560038, guid: 82ecb6d83be0f5a4f92243e88c44ceaf,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4508541356896560038, guid: 82ecb6d83be0f5a4f92243e88c44ceaf,
+        type: 3}
+      propertyPath: m_textInfo.pageCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4508541356896560038, guid: 82ecb6d83be0f5a4f92243e88c44ceaf,
+        type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4508541356896560038, guid: 82ecb6d83be0f5a4f92243e88c44ceaf,
+        type: 3}
+      propertyPath: m_margin.w
+      value: -80.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4508541356896560038, guid: 82ecb6d83be0f5a4f92243e88c44ceaf,
+        type: 3}
+      propertyPath: m_firstOverflowCharacterIndex
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4508541356896560038, guid: 82ecb6d83be0f5a4f92243e88c44ceaf,
+        type: 3}
+      propertyPath: m_margin.x
+      value: -840.4297
+      objectReference: {fileID: 0}
+    - target: {fileID: 4508541356896560038, guid: 82ecb6d83be0f5a4f92243e88c44ceaf,
+        type: 3}
+      propertyPath: m_margin.z
+      value: -514.1797
+      objectReference: {fileID: 0}
+    - target: {fileID: 4508541356896560038, guid: 82ecb6d83be0f5a4f92243e88c44ceaf,
+        type: 3}
+      propertyPath: m_margin.y
+      value: -121.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 4508541356896560038, guid: 82ecb6d83be0f5a4f92243e88c44ceaf,
+        type: 3}
+      propertyPath: m_textAlignment
+      value: 258
+      objectReference: {fileID: 0}
+    - target: {fileID: 4508541356896560038, guid: 82ecb6d83be0f5a4f92243e88c44ceaf,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4508541356896560038, guid: 82ecb6d83be0f5a4f92243e88c44ceaf,
+        type: 3}
+      propertyPath: m_fontSizeBase
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 82ecb6d83be0f5a4f92243e88c44ceaf, type: 3}

@@ -211,6 +211,8 @@ public class PlayerMovement : MonoBehaviour
                     winAlert.text = "Level Complete";
                     StartCoroutine("nextLevel");
                     Debug.Log("on territory enter");
+                    //Plays sound
+                    audioSource.PlayOneShot(levelComplete, 1);
                 }
             }
             else
@@ -219,10 +221,11 @@ public class PlayerMovement : MonoBehaviour
                 winAlert.text = "Level Complete";
                 StartCoroutine("nextLevel");
                 Debug.Log("on territory enter");
+                //Plays sound
+                audioSource.PlayOneShot(levelComplete, 1);
             }
             
-            //Plays sound
-            audioSource.PlayOneShot(levelComplete, 1);
+            
 
         }
         
