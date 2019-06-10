@@ -205,7 +205,7 @@ public class PlayerMovement : MonoBehaviour
             onTerritory = true;
             if (crates)
             {
-                if (numCrates == crate_num)
+                if (numCrates == crate_num*2)
                 {
                     win = true;
                     winAlert.text = "Level Complete";
