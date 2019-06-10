@@ -51,7 +51,7 @@ public class PlayerMovement : MonoBehaviour
 
 
     //sound
-    public GameObject playerSound;
+    private AudioSource playerSound;
 
 
     Vector3 originalPos;
@@ -83,8 +83,8 @@ public class PlayerMovement : MonoBehaviour
         lastPosition = this.transform.position;
         originalPos = this.transform.position;
         print(originalPos);
-
-
+        
+        playerSound = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -156,7 +156,8 @@ public class PlayerMovement : MonoBehaviour
             }
 
             //Plays sound
-            Instantiate(playerSound, other.transform.position, other.transform.rotation);
+            //Instantiate(playerSound, other.transform.position, other.transform.rotation);
+            playerSound.Play();
         }
         
         if (other.gameObject.CompareTag("Crate1"))
