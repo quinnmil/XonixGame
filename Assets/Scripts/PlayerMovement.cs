@@ -30,22 +30,20 @@ public class PlayerMovement : MonoBehaviour
     private static int deaths = 0;
     public bool win = false;
     public int crate_num;
-    public static int numCrates = 0;
+    public int numCrates = 0;
     public bool crates = false;
     public GameObject crate;
     private GameObject crate_clone;
     public Vector3 crate_pos;
- 
     
-    //sound
+    //sounds
     public GameObject playerSound;
-
+    public GameObject levelCompleteSound;
 
     Vector3 originalPos;
     public TextMeshProUGUI deathCounter;
     public TextMeshProUGUI winAlert;
     public TextMeshProUGUI crateCounter;
-
 
 
 
@@ -58,9 +56,7 @@ public class PlayerMovement : MonoBehaviour
         lastPosition = this.transform.position;
         originalPos = this.transform.position;
         print(originalPos);
-
-        if (crates) 
-            crate_clone = Instantiate(crate,crate_pos,Quaternion.identity);
+        crate_clone = Instantiate(crate,crate_pos,Quaternion.identity);
     }
 
     private void Update()
@@ -104,8 +100,7 @@ public class PlayerMovement : MonoBehaviour
         {
             numCrates = 0;
             enemy = true;
-            if (crates)
-                crate_clone = Instantiate(crate,crate_pos, Quaternion.identity);
+            crate_clone = Instantiate(crate,crate_pos, Quaternion.identity);
             
             //Plays sound
             Instantiate(playerSound, other.transform.position, other.transform.rotation);
@@ -114,7 +109,7 @@ public class PlayerMovement : MonoBehaviour
         if (other.gameObject.CompareTag("Crate"))
         {
             Destroy(crate_clone);
-            numCrates += 1;
+            numCrates = 1;
             
 
         }
@@ -124,12 +119,10 @@ public class PlayerMovement : MonoBehaviour
             if (crates)
             {
                 if (numCrates == crate_num)
-                {
                     win = true;
                     winAlert.text = "Level Complete";
                     StartCoroutine("nextLevel");
                     Debug.Log("on territory enter");
-                }
             }
             else
             {
@@ -137,6 +130,10 @@ public class PlayerMovement : MonoBehaviour
                 winAlert.text = "Level Complete";
                 StartCoroutine("nextLevel");
                 Debug.Log("on territory enter");
+
+                //Plays level complete sound
+                Instantiate(levelCompleteSound, other.transform.position, other.transform.rotation);
+
             }
 
         }
@@ -271,7 +268,6 @@ public class PlayerMovement : MonoBehaviour
                 lastPress = "down_vertical";
             }
         }
-
 
     }
 
