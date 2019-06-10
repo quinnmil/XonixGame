@@ -1765,6 +1765,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &615215025 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2140285460, guid: 82ecb6d83be0f5a4f92243e88c44ceaf,
+    type: 3}
+  m_PrefabInstance: {fileID: 615215022}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &630733042 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5244149864931819535, guid: 66fe3d3e283e76940a27e9311fc094a7,
@@ -4219,14 +4231,13 @@ MonoBehaviour:
   orig_z: -28
   win: 0
   crate_num: 0
-  numCrates: 0
   crates: 0
-  crate: {fileID: 0}
+  crate: {fileID: 1361757123250578, guid: f0c1a7c4de192d8478475b7722726970, type: 3}
   crate_pos: {x: 0, y: 0, z: 0}
   playerSound: {fileID: 792328601}
   deathCounter: {fileID: 615215024}
   winAlert: {fileID: 615215023}
-  crateCounter: {fileID: 0}
+  crateCounter: {fileID: 615215025}
 --- !u!1001 &1174351899
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6594,6 +6605,11 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1171517496}
+    - target: {fileID: 6470528650680264830, guid: ce92b8ff3d881f74c9bcdd77ca5a40a9,
+        type: 3}
+      propertyPath: field of view
+      value: 42
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ce92b8ff3d881f74c9bcdd77ca5a40a9, type: 3}
 --- !u!1001 &6660823339939428688

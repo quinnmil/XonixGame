@@ -30,11 +30,12 @@ public class PlayerMovement : MonoBehaviour
     private static int deaths = 0;
     public bool win = false;
     public int crate_num;
-    public int numCrates = 0;
+    public static int numCrates = 0;
     public bool crates = false;
     public GameObject crate;
     private GameObject crate_clone;
     public Vector3 crate_pos;
+ 
     
     //sound
     public GameObject playerSound;
@@ -48,6 +49,7 @@ public class PlayerMovement : MonoBehaviour
 
 
 
+
     void Start()
     {
 
@@ -56,7 +58,9 @@ public class PlayerMovement : MonoBehaviour
         lastPosition = this.transform.position;
         originalPos = this.transform.position;
         print(originalPos);
-        crate_clone = Instantiate(crate,crate_pos,Quaternion.identity);
+
+        if (crates) 
+            crate_clone = Instantiate(crate,crate_pos,Quaternion.identity);
     }
 
     private void Update()
@@ -100,7 +104,8 @@ public class PlayerMovement : MonoBehaviour
         {
             numCrates = 0;
             enemy = true;
-            crate_clone = Instantiate(crate,crate_pos, Quaternion.identity);
+            if (crates)
+                crate_clone = Instantiate(crate,crate_pos, Quaternion.identity);
             
             //Plays sound
             Instantiate(playerSound, other.transform.position, other.transform.rotation);
@@ -109,7 +114,7 @@ public class PlayerMovement : MonoBehaviour
         if (other.gameObject.CompareTag("Crate"))
         {
             Destroy(crate_clone);
-            numCrates = 1;
+            numCrates += 1;
             
 
         }
@@ -119,10 +124,12 @@ public class PlayerMovement : MonoBehaviour
             if (crates)
             {
                 if (numCrates == crate_num)
+                {
                     win = true;
                     winAlert.text = "Level Complete";
                     StartCoroutine("nextLevel");
                     Debug.Log("on territory enter");
+                }
             }
             else
             {

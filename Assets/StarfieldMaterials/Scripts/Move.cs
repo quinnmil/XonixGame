@@ -1,5 +1,6 @@
 ﻿using UnityEngine; 
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class Move : MonoBehaviour
 {
@@ -15,6 +16,14 @@ public class Move : MonoBehaviour
         Target += Time.deltaTime / 125;
 
         transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, transform.position.y, Target), 0.05f);
+        StartCoroutine("nextLevel");
 
-	}
+
+    }
+    IEnumerator nextLevel()
+    {
+        yield return new WaitForSeconds(3);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+
+    }
 }
