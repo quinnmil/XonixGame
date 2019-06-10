@@ -37,8 +37,13 @@ public class PlayerMovement : MonoBehaviour
     public Vector3 crate_pos;
     
     //sounds
-    public GameObject playerSound;
-    public GameObject levelCompleteSound;
+    //public GameObject playerSound;
+    //public GameObject levelCompleteSound;
+    
+    private AudioSource playerSound;
+    
+    //public AudioClip playerSound;
+    //public AudioClip levelCompleteSound;
 
     Vector3 originalPos;
     public TextMeshProUGUI deathCounter;
@@ -57,6 +62,9 @@ public class PlayerMovement : MonoBehaviour
         originalPos = this.transform.position;
         print(originalPos);
         crate_clone = Instantiate(crate,crate_pos,Quaternion.identity);
+        
+        playerSound = GetComponent<AudioSource>();
+        //levelCompleteSound = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -103,7 +111,9 @@ public class PlayerMovement : MonoBehaviour
             crate_clone = Instantiate(crate,crate_pos, Quaternion.identity);
             
             //Plays sound
-            Instantiate(playerSound, other.transform.position, other.transform.rotation);
+            //Instantiate(playerSound, other.transform.position, other.transform.rotation);
+            playerSound.Play();
+            //AudioClip.PlayOneShot(playerSound, 0.7F);
         }
         
         if (other.gameObject.CompareTag("Crate"))
@@ -132,7 +142,8 @@ public class PlayerMovement : MonoBehaviour
                 Debug.Log("on territory enter");
 
                 //Plays level complete sound
-                Instantiate(levelCompleteSound, other.transform.position, other.transform.rotation);
+                //Instantiate(levelCompleteSound, other.transform.position, other.transform.rotation);
+                //AudioClip.PlayOneShot(levelCompleteSound, 0.7F);
 
             }
 
