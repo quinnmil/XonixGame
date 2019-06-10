@@ -48,11 +48,12 @@ public class PlayerMovement : MonoBehaviour
     private bool gone_2 = false;
     private bool gone_3 = false;
     private bool gone_4 = false;
-
-
-    //sound
-    private AudioSource playerSound;
-
+    
+    public AudioClip playerSound;
+    public AudioClip levelComplete;
+    public AudioClip collectingSound;
+    AudioSource audioSource;
+    
 
     Vector3 originalPos;
     public TextMeshProUGUI deathCounter;
@@ -83,8 +84,8 @@ public class PlayerMovement : MonoBehaviour
         lastPosition = this.transform.position;
         originalPos = this.transform.position;
         print(originalPos);
-        
-        playerSound = GetComponent<AudioSource>();
+         
+         audioSource = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -156,8 +157,7 @@ public class PlayerMovement : MonoBehaviour
             }
 
             //Plays sound
-            //Instantiate(playerSound, other.transform.position, other.transform.rotation);
-            playerSound.Play();
+            audioSource.PlayOneShot(playerSound, 1);
         }
         
         if (other.gameObject.CompareTag("Crate1"))
@@ -165,35 +165,41 @@ public class PlayerMovement : MonoBehaviour
             Destroy(crate_clone1);
             numCrates += 1;
             gone_1 = true;
-
             
-
+            //Plays sound
+            audioSource.PlayOneShot(collectingSound, 1);
         }
+        
         if (other.gameObject.CompareTag("Crate2"))
         {
             Destroy(crate_clone2);
             numCrates += 1;
             gone_2 = true;
-
-
-
+            
+            //Plays sound
+            audioSource.PlayOneShot(collectingSound, 1);
         }
+        
         if (other.gameObject.CompareTag("Crate3"))
         {
             Destroy(crate_clone3);
             numCrates += 1;
             gone_3 = true;
-
-
-
+            
+            //Plays sound
+            audioSource.PlayOneShot(collectingSound, 1);
         }
+        
         if (other.gameObject.CompareTag("Crate4"))
         {
             Destroy(crate_clone4);
             numCrates += 1;
             gone_4 = true;
-
+            
+            //Plays sound
+            audioSource.PlayOneShot(collectingSound, 1);
         }
+        
         if (other.gameObject.CompareTag("Finish Zone"))
         {
             onTerritory = true;
@@ -214,6 +220,9 @@ public class PlayerMovement : MonoBehaviour
                 StartCoroutine("nextLevel");
                 Debug.Log("on territory enter");
             }
+            
+            //Plays sound
+            audioSource.PlayOneShot(levelComplete, 1);
 
         }
         
