@@ -30,13 +30,26 @@ public class PlayerMovement : MonoBehaviour
     private static int deaths = 0;
     public bool win = false;
     public int crate_num;
-    public static int numCrates = 0;
+    public int numCrates = 0;
     public bool crates = false;
-    public GameObject crate;
-    private GameObject crate_clone;
-    public Vector3 crate_pos;
- 
-    
+    public GameObject crate1;
+    public GameObject crate2;
+    public GameObject crate3;
+    public GameObject crate4;
+    private GameObject crate_clone1;
+    private GameObject crate_clone2;
+    private GameObject crate_clone3;
+    private GameObject crate_clone4;
+    public Vector3 crate_pos1;
+    public Vector3 crate_pos2;
+    public Vector3 crate_pos3;
+    public Vector3 crate_pos4;
+    private bool gone_1 = false;
+    private bool gone_2 = false;
+    private bool gone_3 = false;
+    private bool gone_4 = false;
+
+
     //sound
     public GameObject playerSound;
 
@@ -49,6 +62,18 @@ public class PlayerMovement : MonoBehaviour
 
 
 
+    private void Awake()
+    {
+        if (crates)
+        {
+            print("awake");
+            crate_clone1 = Instantiate(crate1, crate_pos1, Quaternion.identity);
+            crate_clone2 = Instantiate(crate2, crate_pos2, Quaternion.identity);
+            crate_clone3 = Instantiate(crate3, crate_pos3, Quaternion.identity);
+            crate_clone4 = Instantiate(crate4, crate_pos4, Quaternion.identity);
+        }
+
+    }
 
     void Start()
     {
@@ -59,14 +84,13 @@ public class PlayerMovement : MonoBehaviour
         originalPos = this.transform.position;
         print(originalPos);
 
-        if (crates) 
-            crate_clone = Instantiate(crate,crate_pos,Quaternion.identity);
+
     }
 
     private void Update()
     {
         if (crates)
-            crateCounter.text = "Crates:" + numCrates.ToString()+"/"+crate_num.ToString();
+            crateCounter.text = "Crates:" + (numCrates/2).ToString()+"/"+crate_num.ToString();
         deathCounter.text = "Deaths:" + deaths.ToString();
     }
 
@@ -97,6 +121,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (other.gameObject.CompareTag("Vertical Plane"))
             verticalPlane = true;
+
         if (other.gameObject.CompareTag("floor"))
             floor = true;
 
@@ -105,17 +130,67 @@ public class PlayerMovement : MonoBehaviour
             numCrates = 0;
             enemy = true;
             if (crates)
-                crate_clone = Instantiate(crate,crate_pos, Quaternion.identity);
-            
+            {
+                if (gone_1)
+                {
+                    gone_1 = false;
+                    crate_clone1 = Instantiate(crate1, crate_pos1, Quaternion.identity);
+                }
+
+                if (gone_2)
+                {
+                    gone_2 = false;
+                    crate_clone2 = Instantiate(crate2, crate_pos2, Quaternion.identity);
+                }
+
+                if (gone_3)
+                {
+                    gone_3 = false;
+                    crate_clone3 = Instantiate(crate3, crate_pos3, Quaternion.identity);
+                }
+                if (gone_4)
+                {
+                    gone_4 = false;
+                    crate_clone4 = Instantiate(crate4, crate_pos4, Quaternion.identity);
+                }
+            }
+
             //Plays sound
             Instantiate(playerSound, other.transform.position, other.transform.rotation);
         }
         
-        if (other.gameObject.CompareTag("Crate"))
+        if (other.gameObject.CompareTag("Crate1"))
         {
-            Destroy(crate_clone);
+            Destroy(crate_clone1);
             numCrates += 1;
+            gone_1 = true;
+
             
+
+        }
+        if (other.gameObject.CompareTag("Crate2"))
+        {
+            Destroy(crate_clone2);
+            numCrates += 1;
+            gone_2 = true;
+
+
+
+        }
+        if (other.gameObject.CompareTag("Crate3"))
+        {
+            Destroy(crate_clone3);
+            numCrates += 1;
+            gone_3 = true;
+
+
+
+        }
+        if (other.gameObject.CompareTag("Crate4"))
+        {
+            Destroy(crate_clone4);
+            numCrates += 1;
+            gone_4 = true;
 
         }
         if (other.gameObject.CompareTag("Finish Zone"))

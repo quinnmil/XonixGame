@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 1861800973}
   - component: {fileID: 1861800974}
   m_Layer: 0
-  m_Name: PickupCrate
-  m_TagString: Crate
+  m_Name: PickupCrate1
+  m_TagString: Crate1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

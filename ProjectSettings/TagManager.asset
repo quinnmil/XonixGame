@@ -18,6 +18,10 @@ TagManager:
   - Vertical Plane
   - floor
   - Crate
+  - Crate1
+  - Crate2
+  - Crate3
+  - Crate4
   layers:
   - Default
   - TransparentFX
